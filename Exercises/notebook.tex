@@ -1,0 +1,602 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Part 6 - Saving and Loading Models (Exercises)}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{saving-and-loading-models}{%
+\section{Saving and Loading Models}\label{saving-and-loading-models}}
+
+In this notebook, I'll show you how to save and load models with
+PyTorch. This is important because you'll often want to load previously
+trained models to use in making predictions or to continue training on
+new data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}format = \PYZsq{}retina\PYZsq{}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{from} \PY{n+nn}{torch} \PY{k}{import} \PY{n}{nn}
+        \PY{k+kn}{from} \PY{n+nn}{torch} \PY{k}{import} \PY{n}{optim}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{functional} \PY{k}{as} \PY{n+nn}{F}
+        \PY{k+kn}{from} \PY{n+nn}{torchvision} \PY{k}{import} \PY{n}{datasets}\PY{p}{,} \PY{n}{transforms}
+        
+        \PY{k+kn}{import} \PY{n+nn}{helper}
+        \PY{k+kn}{import} \PY{n+nn}{fc\PYZus{}model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Define a transform to normalize the data}
+        \PY{n}{transform} \PY{o}{=} \PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}\PY{p}{[}\PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                        \PY{n}{transforms}\PY{o}{.}\PY{n}{Normalize}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Download and load the training data}
+        \PY{n}{trainset} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{FashionMNIST}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZti{}/.pytorch/F\PYZus{}MNIST\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{download}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{train}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{transform}\PY{p}{)}
+        \PY{n}{trainloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{trainset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Download and load the test data}
+        \PY{n}{testset} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{FashionMNIST}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZti{}/.pytorch/F\PYZus{}MNIST\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{download}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{train}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{transform}\PY{p}{)}
+        \PY{n}{testloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{testset}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    Here we can see one of the images.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{image}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n+nb}{iter}\PY{p}{(}\PY{n}{trainloader}\PY{p}{)}\PY{p}{)}
+        \PY{n}{helper}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{train-a-network}{%
+\section{Train a network}\label{train-a-network}}
+
+To make things more concise here, I moved the model architecture and
+training code from the last part to a file called \texttt{fc\_model}.
+Importing this, we can easily create a fully-connected network with
+\texttt{fc\_model.Network}, and train the network using
+\texttt{fc\_model.train}. I'll use this model (once it's trained) to
+demonstrate how we can save and load models.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Create the network, define the criterion and optimizer}
+        
+        \PY{n}{model} \PY{o}{=} \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{Network}\PY{p}{(}\PY{l+m+mi}{784}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{512}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{]}\PY{p}{)}
+        \PY{n}{criterion} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{NLLLoss}\PY{p}{(}\PY{p}{)}
+        \PY{n}{optimizer} \PY{o}{=} \PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{trainloader}\PY{p}{,} \PY{n}{testloader}\PY{p}{,} \PY{n}{criterion}\PY{p}{,} \PY{n}{optimizer}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/torch/autograd/\_\_init\_\_.py:132: UserWarning: CUDA initialization: Found no NVIDIA driver on your system. Please check that you have an NVIDIA GPU and installed a driver from http://www.nvidia.com/Download/index.aspx (Triggered internally at  /pytorch/c10/cuda/CUDAFunctions.cpp:100.)
+  allow\_unreachable=True)  \# allow\_unreachable flag
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch: 1/2..  Training Loss: 1.731..  Test Loss: 0.941..  Test Accuracy: 0.668
+Epoch: 1/2..  Training Loss: 1.007..  Test Loss: 0.731..  Test Accuracy: 0.723
+Epoch: 1/2..  Training Loss: 0.863..  Test Loss: 0.669..  Test Accuracy: 0.749
+Epoch: 1/2..  Training Loss: 0.796..  Test Loss: 0.676..  Test Accuracy: 0.733
+Epoch: 1/2..  Training Loss: 0.776..  Test Loss: 0.605..  Test Accuracy: 0.771
+Epoch: 1/2..  Training Loss: 0.687..  Test Loss: 0.595..  Test Accuracy: 0.770
+Epoch: 1/2..  Training Loss: 0.687..  Test Loss: 0.576..  Test Accuracy: 0.787
+Epoch: 1/2..  Training Loss: 0.713..  Test Loss: 0.597..  Test Accuracy: 0.777
+Epoch: 1/2..  Training Loss: 0.677..  Test Loss: 0.566..  Test Accuracy: 0.788
+Epoch: 1/2..  Training Loss: 0.647..  Test Loss: 0.554..  Test Accuracy: 0.793
+Epoch: 1/2..  Training Loss: 0.624..  Test Loss: 0.563..  Test Accuracy: 0.784
+Epoch: 1/2..  Training Loss: 0.628..  Test Loss: 0.522..  Test Accuracy: 0.801
+Epoch: 1/2..  Training Loss: 0.610..  Test Loss: 0.508..  Test Accuracy: 0.809
+Epoch: 1/2..  Training Loss: 0.595..  Test Loss: 0.510..  Test Accuracy: 0.816
+Epoch: 1/2..  Training Loss: 0.553..  Test Loss: 0.538..  Test Accuracy: 0.797
+Epoch: 1/2..  Training Loss: 0.596..  Test Loss: 0.513..  Test Accuracy: 0.815
+Epoch: 1/2..  Training Loss: 0.615..  Test Loss: 0.505..  Test Accuracy: 0.816
+Epoch: 1/2..  Training Loss: 0.544..  Test Loss: 0.484..  Test Accuracy: 0.821
+Epoch: 1/2..  Training Loss: 0.575..  Test Loss: 0.494..  Test Accuracy: 0.822
+Epoch: 1/2..  Training Loss: 0.626..  Test Loss: 0.485..  Test Accuracy: 0.827
+Epoch: 1/2..  Training Loss: 0.572..  Test Loss: 0.479..  Test Accuracy: 0.824
+Epoch: 1/2..  Training Loss: 0.571..  Test Loss: 0.492..  Test Accuracy: 0.818
+Epoch: 1/2..  Training Loss: 0.566..  Test Loss: 0.484..  Test Accuracy: 0.823
+Epoch: 2/2..  Training Loss: 0.560..  Test Loss: 0.485..  Test Accuracy: 0.819
+Epoch: 2/2..  Training Loss: 0.550..  Test Loss: 0.499..  Test Accuracy: 0.819
+Epoch: 2/2..  Training Loss: 0.569..  Test Loss: 0.490..  Test Accuracy: 0.820
+Epoch: 2/2..  Training Loss: 0.531..  Test Loss: 0.475..  Test Accuracy: 0.828
+Epoch: 2/2..  Training Loss: 0.573..  Test Loss: 0.473..  Test Accuracy: 0.828
+Epoch: 2/2..  Training Loss: 0.520..  Test Loss: 0.491..  Test Accuracy: 0.828
+Epoch: 2/2..  Training Loss: 0.520..  Test Loss: 0.483..  Test Accuracy: 0.825
+Epoch: 2/2..  Training Loss: 0.510..  Test Loss: 0.462..  Test Accuracy: 0.829
+Epoch: 2/2..  Training Loss: 0.530..  Test Loss: 0.484..  Test Accuracy: 0.819
+Epoch: 2/2..  Training Loss: 0.523..  Test Loss: 0.458..  Test Accuracy: 0.831
+Epoch: 2/2..  Training Loss: 0.544..  Test Loss: 0.467..  Test Accuracy: 0.825
+Epoch: 2/2..  Training Loss: 0.536..  Test Loss: 0.458..  Test Accuracy: 0.833
+Epoch: 2/2..  Training Loss: 0.531..  Test Loss: 0.463..  Test Accuracy: 0.825
+Epoch: 2/2..  Training Loss: 0.521..  Test Loss: 0.450..  Test Accuracy: 0.836
+Epoch: 2/2..  Training Loss: 0.543..  Test Loss: 0.458..  Test Accuracy: 0.835
+Epoch: 2/2..  Training Loss: 0.529..  Test Loss: 0.470..  Test Accuracy: 0.830
+Epoch: 2/2..  Training Loss: 0.480..  Test Loss: 0.463..  Test Accuracy: 0.833
+Epoch: 2/2..  Training Loss: 0.516..  Test Loss: 0.451..  Test Accuracy: 0.837
+Epoch: 2/2..  Training Loss: 0.504..  Test Loss: 0.452..  Test Accuracy: 0.833
+Epoch: 2/2..  Training Loss: 0.515..  Test Loss: 0.453..  Test Accuracy: 0.834
+Epoch: 2/2..  Training Loss: 0.515..  Test Loss: 0.447..  Test Accuracy: 0.838
+Epoch: 2/2..  Training Loss: 0.530..  Test Loss: 0.444..  Test Accuracy: 0.844
+Epoch: 2/2..  Training Loss: 0.487..  Test Loss: 0.446..  Test Accuracy: 0.837
+
+    \end{Verbatim}
+
+    \hypertarget{saving-and-loading-networks}{%
+\subsection{Saving and loading
+networks}\label{saving-and-loading-networks}}
+
+As you can imagine, it's impractical to train a network every time you
+need to use it. Instead, we can save trained networks then load them
+later to train more or use them for predictions.
+
+The parameters for PyTorch networks are stored in a model's
+\texttt{state\_dict}. We can see the state dict contains the weight and
+bias matrices for each of our layers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Our model: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The state dict keys: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Our model: 
+
+ Network(
+  (hidden\_layers): ModuleList(
+    (0): Linear(in\_features=784, out\_features=512, bias=True)
+    (1): Linear(in\_features=512, out\_features=256, bias=True)
+    (2): Linear(in\_features=256, out\_features=128, bias=True)
+  )
+  (output): Linear(in\_features=128, out\_features=10, bias=True)
+  (dropout): Dropout(p=0.5, inplace=False)
+) 
+
+The state dict keys: 
+
+ odict\_keys(['hidden\_layers.0.weight', 'hidden\_layers.0.bias', 'hidden\_layers.1.weight', 'hidden\_layers.1.bias', 'hidden\_layers.2.weight', 'hidden\_layers.2.bias', 'output.weight', 'output.bias'])
+
+    \end{Verbatim}
+
+    The simplest thing to do is simply save the state dict with
+\texttt{torch.save}. For example, we can save it to a file
+\texttt{\textquotesingle{}network\_A.pth\textquotesingle{}}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{torch}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{network\PYZus{}A.pth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Then we can load the state dict with \texttt{torch.load}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{state\PYZus{}dict} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{network\PYZus{}A.pth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{state\PYZus{}dict}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+odict\_keys(['hidden\_layers.0.weight', 'hidden\_layers.0.bias', 'hidden\_layers.1.weight', 'hidden\_layers.1.bias', 'hidden\_layers.2.weight', 'hidden\_layers.2.bias', 'output.weight', 'output.bias'])
+
+    \end{Verbatim}
+
+    And to load the state dict in to the network, you do
+\texttt{model.load\_state\_dict(state\_dict)}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{state\PYZus{}dict}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <All keys matched successfully>
+\end{Verbatim}
+            
+    Seems pretty straightforward, but as usual it's a bit more complicated.
+Loading the state dict works only if the model architecture is exactly
+the same as the checkpoint architecture. If I create a model with a
+different architecture, this fails.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Try this}
+         \PY{n}{model} \PY{o}{=} \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{Network}\PY{p}{(}\PY{l+m+mi}{784}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{400}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} This will throw an error because the tensor sizes are wrong!}
+         \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{state\PYZus{}dict}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        RuntimeError                              Traceback (most recent call last)
+
+        <ipython-input-10-d859c59ebec0> in <module>
+          2 model = fc\_model.Network(784, 10, [400, 200, 100])
+          3 \# This will throw an error because the tensor sizes are wrong!
+    ----> 4 model.load\_state\_dict(state\_dict)
+    
+
+        /opt/conda/lib/python3.6/site-packages/torch/nn/modules/module.py in load\_state\_dict(self, state\_dict, strict)
+       1050         if len(error\_msgs) > 0:
+       1051             raise RuntimeError('Error(s) in loading state\_dict for \{\}:\textbackslash{}n\textbackslash{}t\{\}'.format(
+    -> 1052                                self.\_\_class\_\_.\_\_name\_\_, "\textbackslash{}n\textbackslash{}t".join(error\_msgs)))
+       1053         return \_IncompatibleKeys(missing\_keys, unexpected\_keys)
+       1054 
+
+
+        RuntimeError: Error(s) in loading state\_dict for Network:
+    	size mismatch for hidden\_layers.0.weight: copying a param with shape torch.Size([512, 784]) from checkpoint, the shape in current model is torch.Size([400, 784]).
+    	size mismatch for hidden\_layers.0.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([400]).
+    	size mismatch for hidden\_layers.1.weight: copying a param with shape torch.Size([256, 512]) from checkpoint, the shape in current model is torch.Size([200, 400]).
+    	size mismatch for hidden\_layers.1.bias: copying a param with shape torch.Size([256]) from checkpoint, the shape in current model is torch.Size([200]).
+    	size mismatch for hidden\_layers.2.weight: copying a param with shape torch.Size([128, 256]) from checkpoint, the shape in current model is torch.Size([100, 200]).
+    	size mismatch for hidden\_layers.2.bias: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([100]).
+    	size mismatch for output.weight: copying a param with shape torch.Size([10, 128]) from checkpoint, the shape in current model is torch.Size([10, 100]).
+
+    \end{Verbatim}
+
+    This means we need to rebuild the model exactly as it was when trained.
+Information about the model architecture needs to be saved in the
+checkpoint, along with the state dict. To do this, you build a
+dictionary with all the information you need to compeletely rebuild the
+model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{checkpoint} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{784}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hidden\PYZus{}layers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{each}\PY{o}{.}\PY{n}{out\PYZus{}features} \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n}{model}\PY{o}{.}\PY{n}{hidden\PYZus{}layers}\PY{p}{]}\PY{p}{,}
+                       \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state\PYZus{}dict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{model}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{torch}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{checkpoint}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{network\PYZus{}B.pth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now the checkpoint has all the necessary information to rebuild the
+trained model. You can easily make that a function if you want.
+Similarly, we can write a function to load checkpoints.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{load\PYZus{}checkpoint}\PY{p}{(}\PY{n}{filepath}\PY{p}{)}\PY{p}{:}
+             \PY{n}{checkpoint} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{filepath}\PY{p}{)}
+             \PY{n}{model} \PY{o}{=} \PY{n}{fc\PYZus{}model}\PY{o}{.}\PY{n}{Network}\PY{p}{(}\PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                      \PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{output\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                      \PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hidden\PYZus{}layers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{checkpoint}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state\PYZus{}dict}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Exercise 6.1: }
+         \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: Import saved network B, loads it to network and print network model}
+         
+         \PY{n}{networkB} \PY{o}{=} \PY{n}{load\PYZus{}checkpoint}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{network\PYZus{}B.pth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{networkB}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Network(
+  (hidden\_layers): ModuleList(
+    (0): Linear(in\_features=784, out\_features=400, bias=True)
+    (1): Linear(in\_features=400, out\_features=200, bias=True)
+    (2): Linear(in\_features=200, out\_features=100, bias=True)
+  )
+  (output): Linear(in\_features=100, out\_features=10, bias=True)
+  (dropout): Dropout(p=0.5, inplace=False)
+)
+
+    \end{Verbatim}
+
+    \hypertarget{reflection}{%
+\subsection{Reflection}\label{reflection}}
+
+Answer briefly following questions (in English or Finnish): - What is
+ONNX?
+
+    \begin{itemize}
+\tightlist
+\item
+  Open Neural Network Exchange (ONNX) on open source AI kehitys
+  ekosysteemi, joka tarjoaa kone- ja syväoppimismalleja.
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
