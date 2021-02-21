@@ -4,4 +4,4 @@ Erilaisia tehtäviä ja perehdytystä pythonin Pytorch-kirjaston käyttöön Jup
 
 Pääsisältönä neuroverkkojen ymmärrys, rakennus, opetus ja testaus.
 
-Esimerkkitehtvässä pitää ennustaa onko kuvassa koira vai kissa käyttäen Kagglen kuuluisaa dogs_vs_cats datasettiä.
+Esimerkkitehtävissä pitää ennustaa onko kuvassa koira vai kissa käyttäen Kagglen kuuluisaa dogs_vs_cats datasettiä.
