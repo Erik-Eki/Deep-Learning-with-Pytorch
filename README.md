@@ -1,5 +1,5 @@
-# Deep Learning Pytorchilla
+# Syväoppiminen Pytorchilla
 
-Erilaisia tehtäviä ja perehdytystä pythonin Pytorch-kirjaston käyttöön.
+Erilaisia tehtäviä ja perehdytystä pythonin Pytorch-kirjaston käyttöön Jupyter Notebook ympäristössä.
 
-Pääsisältönä neuroverkkojen rakennus, opetus ja testaus.
+Pääsisältönä neuroverkkojen ymmärrys, rakennus, opetus ja testaus.
